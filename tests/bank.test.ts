@@ -36,4 +36,15 @@ describe('Bank class', () => {
             expect(() => bank.createAccount('John Doe', -30)).toThrow('Age must be positive');
         });
     });
+    
+    describe('getBalance', () => {
+        it('should return the correct balance for a valid account number', () => {
+            const balance = bank.getBalance(testAccount.accountNumber!);
+            expect(balance).toBe(testAccount.balance);
+        });
+
+        it('should throw an error for an invalid account number', () => {
+            expect(() => bank.getBalance(12345)).toThrow('Account not found');
+        });
+    });
 });

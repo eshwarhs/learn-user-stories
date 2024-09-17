@@ -31,4 +31,14 @@ export default class Bank {
         };
         this.accounts.push(newAccount);
     }
+
+    getBalance(accountNumber: number): number | undefined {
+        if (this.accounts.find(account => account.accountNumber === accountNumber)) {
+            let account =  this.accounts.find(account => account.accountNumber === accountNumber);
+            return account?.balance;
+        }
+        else {
+            throw new Error('Account not found');
+        }
+    }
 }
