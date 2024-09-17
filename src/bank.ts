@@ -41,4 +41,16 @@ export default class Bank {
             throw new Error('Account not found');
         }
     }
+
+    deposit(accountNumber: number, amount: number): void {
+        let account =  this.accounts.find(account => account.accountNumber === accountNumber);
+        if (account) {
+            if (amount < 0) {
+                throw new Error('Amount must be positive');
+            }
+            account.balance += amount;
+        } else {
+            throw new Error('Account not found');
+        }
+    }
 }

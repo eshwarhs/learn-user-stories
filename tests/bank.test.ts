@@ -47,4 +47,19 @@ describe('Bank class', () => {
             expect(() => bank.getBalance(12345)).toThrow('Account not found');
         });
     });
+
+    describe('deposit', () => {
+        it('should deposit money into the account', () => {
+            bank.deposit(testAccount.accountNumber!, 100);
+            expect(bank.getBalance(testAccount.accountNumber!)).toBe(100);
+        });
+
+        it('should throw an error when depositing a negative amount', () => {
+            expect(() => bank.deposit(testAccount.accountNumber!, -50)).toThrow('Amount must be positive');
+        });
+
+        it('should throw an error when depositing into an invalid account', () => {
+            expect(() => bank.deposit(12345, 100)).toThrow('Account not found');
+        });
+    });
 });
