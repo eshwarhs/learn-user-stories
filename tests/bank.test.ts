@@ -62,4 +62,21 @@ describe('Bank class', () => {
             expect(() => bank.deposit(12345, 100)).toThrow('Account not found');
         });
     });
+
+    describe('withdraw', () => {
+        it('should withdraw money from the account', () => {
+            bank.deposit(testAccount.accountNumber!, 100);
+            bank.withdraw(testAccount.accountNumber!, 50);
+            expect(bank.getBalance(testAccount.accountNumber!)).toBe(50);
+        });
+
+        it('should throw an error if withdrawal amount is greater than the balance', () => {
+            bank.deposit(testAccount.accountNumber!, 100);
+            expect(() => bank.withdraw(testAccount.accountNumber!, 150)).toThrow('Insufficient balance');
+        });
+
+        it('should throw an error when withdrawing from an invalid account', () => {
+            expect(() => bank.withdraw(12345, 50)).toThrow('Account not found');
+        });
+    });
 });

@@ -53,4 +53,17 @@ export default class Bank {
             throw new Error('Account not found');
         }
     }
+
+    withdraw(accountNumber: number, amount: number): void {
+        let account =  this.accounts.find(account => account.accountNumber === accountNumber);
+        if (account) {
+            if (account.balance < amount) {
+                throw new Error('Insufficient balance');
+            }
+            account.balance -= amount;
+        }
+        else {
+            throw new Error('Account not found');
+        }
+    }
 }
